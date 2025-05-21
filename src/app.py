@@ -13,8 +13,42 @@ def calculate_savings_over_time(current, monthly, rate, years):
         savings.append(total)
     return savings
 
+def show_about_page():
+    st.title("Hvad er renter, renters rente og hvordan udnytter du det?")
+    st.markdown("""
+**Rente** er det beløb, du får for at have penge stående på en konto eller investeret.  
+**Renters rente** betyder, at du får rente af både dine egne penge og de renter, du tidligere har fået.  
+Det gør, at din opsparing vokser hurtigere over tid!
+
+### Eksempel på renters rente
+Hvis du investerer 10.000 kr. med 7% i årlig rente, har du efter 10 år:
+- Uden renters rente: 10.000 kr. + (10 x 700 kr.) = 17.000 kr.
+- Med renters rente: ca. 19.672 kr.
+
+Jo længere tid og jo højere rente, jo større effekt!
+
+### Sådan udnytter du renters rente:
+- **Start tidligt:** Jo før du starter, jo mere vokser din opsparing.
+- **Invester regelmæssigt:** Små beløb hver måned gør en stor forskel over tid.
+- **Geninvester renter:** Lad renterne blive investeret, så de også vokser.
+- **Undgå at hæve penge:** Hver gang du hæver, mister du fremtidig vækst.
+
+---
+**Tip:** Brug grafen i denne app til at se, hvor meget renters rente betyder for din opsparing!
+""")
+
 def main():
-    # Sidebar: Sprog og valuta
+    # Sidebar navigation
+    page = st.sidebar.radio(
+        "Vælg side / Choose page",
+        ("Millionærberegner", "Om renter og opsparing")
+    )
+
+    if page == "Om renter og opsparing":
+        show_about_page()
+        return
+
+    # Millionærberegneren
     lang = st.sidebar.selectbox("Sprog / Language", ["Dansk", "English"])
     currency = st.sidebar.selectbox("Valuta / Currency", ["DKK", "USD", "EUR"])
     currency_symbol = {"DKK": "kr", "USD": "$", "EUR": "€"}[currency]
