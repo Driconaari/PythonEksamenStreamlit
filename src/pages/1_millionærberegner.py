@@ -101,43 +101,43 @@ else:
 
 years_to_simulate = st.slider(t["years"], 1, 50, 30, 1)
 
-if st.button(t["calc"]):
-    years_needed = calculate_years_to_millionaire(current_savings, monthly_investment, annual_return_rate)
-    st.success(t["result"].format(years=years_needed))
+# Beregn og vis ALTID (ingen knap)fjenerde knappen 
+years_needed = calculate_years_to_millionaire(current_savings, monthly_investment, annual_return_rate)
+st.success(t["result"].format(years=years_needed))
 
-    # Graf over opsparing
-    savings = calculate_savings_over_time(current_savings, monthly_investment, annual_return_rate, years_to_simulate)
-    df = pd.DataFrame({
-        "År": list(range(1, years_to_simulate + 1)),
-        "Opsparing": savings
-    })
-    fig, ax = plt.subplots()
-    ax.plot(df["År"], df["Opsparing"], label="Opsparing")
-    ax.axhline(1_000_000, color="red", linestyle="--", label="1 million")
-    ax.set_xlabel("År")
-    ax.set_ylabel(f"Opsparing ({currency_symbol})")
-    ax.set_title(t["graph"])
-    ax.legend()
-    st.pyplot(fig)
+# Graf over opsparing
+savings = calculate_savings_over_time(current_savings, monthly_investment, annual_return_rate, years_to_simulate)
+df = pd.DataFrame({
+    "År": list(range(1, years_to_simulate + 1)),
+    "Opsparing": savings
+})
+fig, ax = plt.subplots()
+ax.plot(df["År"], df["Opsparing"], label="Opsparing")
+ax.axhline(1_000_000, color="red", linestyle="--", label="1 million")
+ax.set_xlabel("År")
+ax.set_ylabel(f"Opsparing ({currency_symbol})")
+ax.set_title(t["graph"])
+ax.legend()
+st.pyplot(fig)
 
-    # Download-knap
-    csv = df.to_csv(index=False).encode("utf-8")
-    st.download_button(
-        label=t["download"],
-        data=csv,
-        file_name="opsparing.csv",
-        mime="text/csv"
-    )
+# Download-knap
+csv = df.to_csv(index=False).encode("utf-8")
+st.download_button(
+    label=t["download"],
+    data=csv,
+    file_name="opsparing.csv",
+    mime="text/csv"
+)
 
-    # Ekstra info
-    total_interest = savings[-1] - (current_savings + monthly_investment * 12 * years_to_simulate)
-    st.info(f"Efter {years_to_simulate} år har du {savings[-1]:,.0f} {currency_symbol}. Renter har bidraget med {total_interest:,.0f} {currency_symbol}.")
+# Ekstra info
+total_interest = savings[-1] - (current_savings + monthly_investment * 12 * years_to_simulate)
+st.info(f"Efter {years_to_simulate} år har du {savings[-1]:,.0f} {currency_symbol}. Renter har bidraget med {total_interest:,.0f} {currency_symbol}.")
 
-    # Forslag hvis man ikke når målet hurtigt nok
-    if years_needed > years_to_simulate:
-        st.warning(t["sooner"])
-        options = suggest_investment_options(current_savings, monthly_investment, years_to_simulate)
-        for option in options:
-            st.write(f"- {option}")
-    else:
-        st.success(t["ontrack"])
+# Forslag hvis man ikke når målet hurtigt nok
+if years_needed > years_to_simulate:
+    st.warning(t["sooner"])
+    options = suggest_investment_options(current_savings, monthly_investment, years_to_simulate)
+    for option in options:
+        st.write(f"- {option}")
+else:
+    st.success(t["ontrack"])

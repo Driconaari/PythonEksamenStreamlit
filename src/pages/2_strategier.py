@@ -1,4 +1,7 @@
 import streamlit as st
+import streamlit as st
+import matplotlib.pyplot as plt
+
 
 st.title("Strategier til at blive millionær")
 st.markdown("""
@@ -29,4 +32,10 @@ Her er nogle alternative og vigtige måder, du kan forbedre din økonomi og øge
 
 ---
 **Tip:** Små ændringer i hverdagen kan gøre en stor forskel på lang sigt!
+""")
+
+st.header("💡 Leg med din økonomi – Sandkasse")
+
+st.markdown("""
+Prøv at ændre på tallene og se, hvordan din opsparing kan vokse over tid!
 """)
