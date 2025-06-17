@@ -1,41 +1,54 @@
 import streamlit as st
-import streamlit as st
-import matplotlib.pyplot as plt
 
+st.set_page_config(page_title="Strategier", page_icon="💰")
 
-st.title("Strategier til at blive millionær")
+st.title("💡 Strategier til at blive millionær")
+st.subheader("Gode vaner og smarte valg gør forskellen!")
+
+st.info("Du behøver ikke være rig for at blive millionær – men du skal være vedholdende, tålmodig og strategisk. Her er nogle gennemprøvede måder at komme tættere på dit mål:")
+
+# Strategier i sektioner med emojis og tydelig inddeling
+strategies = {
+    "📈 Øg din indkomst": [
+        "Tag et deltidsjob eller begynd at freelance.",
+        "Forhandl dig til en højere løn.",
+        "Start en lille virksomhed eller 'side hustle'."
+    ],
+    "💳 Sænk dine udgifter": [
+        "Lav et realistisk budget og følg det.",
+        "Skær ned på abonnementer og impulskøb.",
+        "Overvej billigere bolig eller transport."
+    ],
+    "💼 Invester smart": [
+        "Start tidligt med at investere – renters rente er din ven.",
+        "Spred din risiko: aktier, fonde, ejendom m.m.",
+        "Geninvester dine afkast løbende."
+    ],
+    "📚 Lær om økonomi": [
+        "Læs bøger og blogs om privatøkonomi og investering.",
+        "Tag gratis kurser online – fx via Coursera eller YouTube.",
+        "Følg økonomi-podcasts og eksperter."
+    ],
+    "🎯 Sæt mål og følg op": [
+        "Definér konkrete, målbare sparemål.",
+        "Brug apps eller regneark til at holde overblik.",
+        "Fejr små fremskridt undervejs!"
+    ]
+}
+
+for title, bullets in strategies.items():
+    st.markdown(f"### {title}")
+    for tip in bullets:
+        st.markdown(f"- {tip}")
+
+# Sandkasse / Eksperiment
+st.divider()
+st.subheader("🎮 Leg med din økonomi – Sandkasse")
+
 st.markdown("""
-Her er nogle alternative og vigtige måder, du kan forbedre din økonomi og øge dine chancer for at blive millionær:
+Har du været inde og ændre på tallene i beregneren? Det er her, magien sker!
 
-### 1. Øg din indkomst
-- Tag et ekstra job eller freelance ved siden af.
-- Forhandl løn eller find bedre betalte jobs.
-- Start en lille virksomhed eller side hustle.
-
-### 2. Sænk dine udgifter
-- Lav et budget og hold dig til det.
-- Skær ned på unødvendige abonnementer og impulskøb.
-- Flyt til billigere bolig eller sælg bilen, hvis muligt.
-
-### 3. Invester smart
-- Invester i aktier, fonde eller ejendomme.
-- Udnyt renters rente ved at investere tidligt og regelmæssigt.
-- Diversificér dine investeringer for at sprede risikoen.
-
-### 4. Lær om økonomi
-- Læs bøger, blogs eller tag onlinekurser om privatøkonomi og investering.
-- Følg eksperter og podcasts for inspiration og viden.
-
-### 5. Sæt mål og følg op
-- Sæt konkrete, målbare mål for din opsparing og investering.
-- Brug apps eller regneark til at følge din udvikling.
-
----
-**Tip:** Små ændringer i hverdagen kan gøre en stor forskel på lang sigt!
+👉 Gå tilbage til **Millionærberegneren** og test, hvordan forskellige beløb, rentesatser og tidsrammer påvirker din vej til millionen.
 """)
 
-st.header("💡 Leg med din økonomi – Sandkasse")
-
-st.markdown("""
-Prøv at ændre på tallene og se, hvordan din opsparing kan vokse over tid!
-""")
+st.success("Tip: Det er bedre at starte småt end aldrig at komme i gang 💪")
