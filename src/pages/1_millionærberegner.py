@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from utils.calculations import calculate_years_to_millionaire, suggest_investment_options
 
+
 def calculate_savings_over_time(current, monthly, rate, years):
     savings = []
     total = current
@@ -101,9 +102,18 @@ else:
 
 years_to_simulate = st.slider(t["years"], 1, 50, 30, 1)
 
-# Beregn og vis ALTID (ingen knap)fjenerde knappen 
+# Beregn og vis resultat
 years_needed = calculate_years_to_millionaire(current_savings, monthly_investment, annual_return_rate)
-st.success(t["result"].format(years=years_needed))
+
+if years_needed > years_to_simulate:
+    st.error(
+        f"⚠️ {t['result'].format(years=years_needed)} "
+        f"men det er **efter** din valgte tidsramme på {years_to_simulate} år. "
+        f"Prøv at øge din investering eller rente."
+    )
+else:
+    st.success(t["result"].format(years=years_needed))
+
 
 # Graf over opsparing
 savings = calculate_savings_over_time(current_savings, monthly_investment, annual_return_rate, years_to_simulate)

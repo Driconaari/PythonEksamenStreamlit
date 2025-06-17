@@ -1,14 +1,18 @@
-def calculate_years_to_millionaire(current_savings, monthly_contribution, annual_interest_rate):
+def calculate_years_to_millionaire(current_savings, monthly_contribution, annual_interest_rate, max_years=100):
     target_amount = 1_000_000
     years = 0
     total_savings = current_savings
 
-    while total_savings < target_amount:
-        total_savings += monthly_contribution * 12
-        total_savings *= (1 + annual_interest_rate)
+    while total_savings < target_amount and years < max_years:
+        for _ in range(12):
+            total_savings = total_savings * (1 + annual_interest_rate / 100 / 12) + monthly_contribution
         years += 1
 
-    return years
+    if total_savings >= target_amount:
+        return years
+    else:
+        return None  # Millionen nås ikke inden for grænsen
+
 
 def suggest_investment_options(current_savings, monthly_contribution, years_to_millionaire):
     suggestions = []
